@@ -1,4 +1,4 @@
-# Central Bank User Registration System
+# Bank User Registration System
 
 A simple Java project that simulates a basic user registration system for a banking environment.
 
