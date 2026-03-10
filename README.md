@@ -1,108 +1,157 @@
 # Bank User Registration System
 
-A simple Java project that simulates a basic user registration system for a banking environment.
+A simple banking system developed in Java focused on Object-Oriented Programming (OOP) and clean project structure using packages.
 
-The program allows the user to enter personal data and store it in memory using an ArrayList.  
-After the registration, the system can display the stored user information.
+This project simulates a basic banking environment where users can:
+- Create an account
+- Log into the system
+- Perform banking operations
+- View account information
 
 ## Technologies Used
-
 - Java
 - Object-Oriented Programming (OOP)
 - ArrayList
-- Scanner (for input)
+- Scanner
+- Layered architecture (packages)
 
 ## Project Structure
 src
 │
+├── application
+│   └── Main.java
+│
 ├── entities
-│ └── UserAccount.java
+│   └── UserAccount.java
+│
+├── menu
+│   ├── LoginMenu.java
+│   └── BankMenu.java
 │
 └── services
-└── UserAccountService.java
+├── UserAccountService.java
+└── TransactionService.java
 
-### entities/UserAccount
+# entities
 
-This class represents a **bank user account**.  
-It contains the user's personal data and the getters/setters.
+## UserAccount
+
+Contains the system model classes.
+
+Represents a bank user account.
 
 Attributes:
-
 - `name` – User's name
 - `cpf` – Brazilian identification number
 - `email` – User email
 - `age` – User age
+- `password` - Account password
+- `balance` - Account balance
 
-Example constructor:
+This class also includes:
+- Constructors
+- Getters and Setters
+
+# services
+
+Responsible for the system business logic.
+
+## UserAccountService.java
+
+Responsible for:
+- Creating accounts
+- Storing accounts in memory
+- Searching users
+- Validating login
+
+Uses:
+`ArrayList<UserAccount>` to store created accounts.
+
+# TransactionService.java
+
+Responsible for bank transactions, such as:
+- Deposit
+- Withdrawal
+- Transfer
+- Bill payment
+
+# menu
+
+Contains the classes responsible for the console interaction with the user.
+
+## LoginMenu.java
+
+Responsible for:
+- Creating accounts
+- Creating a password
+- User login
+- Redirecting the user to the bank menu
+
+## BankMenu.java
+
+Menu displayed after the user logs in.
+- Allows the user to:
+- Deposit money
+- Withdraw money
+- Transfer money
+- Check account balance
+- Exit the account
+
+# Concepts Applied
+
+- This project applies several important programming concepts:
+- Object-Oriented Programming
+- Separation of responsibilities
+- Encapsulation
+- Layered architecture
+- List manipulation (ArrayList)
+- User input with Scanner
+- Console menu structures
+
+# How to run project
+
+## Clone the repository
+`git clone https://github.com/your-username/bank-system.git`
+
+## Open the project in an IDE such as:
+- IntelliJ
+- Eclipse
+- VS Code
+
+## Run the file
+
+`Main.java`
+
+# Exemple Execution
 
 ```java
-UserAccount user = new UserAccount(name, cpf, email, age);
-services/UserAccountService
+==== GB BANK ===
 
-This class is responsible for:
+1 - Create account
+2 - Login
+0 - Exit
 
-collecting user data
+//AFTER CREATE ACCOUNT
 
-creating the user object
+Enter your name:
+Enter your CPF:
+Enter your email:
+Enter your age:
+Create a 6-digit password:
 
-storing the object in an ArrayList
+//AFTER LOGIN
 
-displaying the stored users
+==== BANK MENU ====
 
-Main methods:
+1 - Deposit
+2 - Withdraw
+3 - Transfer
+4 - Check balance
+0 - Exit
 
-createUser()
+@Author Gabriel Sousa Ferreira
 
-Reads user data from the keyboard and creates a new UserAccount.
-
-displayUser()
-
-Displays all registered users stored in the list.
-
-How the Program Works
-
-The program displays a welcome message.
-
-The user enters personal information:
-
-Name
-
-CPF
-
-Email
-
-Age
-
-The system creates a UserAccount object.
-
-The object is stored in an ArrayList.
-
-The user can choose to display the stored data.
-
-=====================================
-=== WELCOME TO CENTRAL BANK ===
-=====================================
-
-Type your personal data:
-
-Name: Gabriel
-CPF: 12345678900
-E-mail: gabriel@email.com
-Age: 25
-
-New user added, welcome Gabriel
-
-Do you want to see your entered data?
-Concepts Practiced
-
-Object-Oriented Programming
-
-Class separation (Entities / Services)
-
-Encapsulation
-
-Lists with ArrayList
-
-User input with Scanner
-
-Author Gabriel de Sousa Ferreira
+Project developed for studying:
+- Java
+- Object-Oriented Programming
+- System architecture and organization

@@ -6,49 +6,66 @@ import java.util.*;
 
 public class UserAccountService {
 
+    //UserAccount user = new UserAccount(name, cpf, email, age, password, balance);
+
     private static final String HEADER =
-            "=====================================\n" +
-            "===    WELCOME TO CENTRAL BANK    ===\n" +
-            "=====================================";
+            "==========================\n" +
+            "===    ACCOUNT MENU    ===\n" +
+            "===========================";
 
-    private static final ArrayList<UserAccount> userAccountList = new ArrayList<>();
+    private ArrayList<UserAccount> users = new ArrayList<>();
 
-    public static void createUser(){
-        Scanner sc = new Scanner(System.in);
+    public void createUser(Scanner sc){
 
         IO.println(HEADER);
-        IO.println("\nType your personal data:");
-        IO.print("\nName: ");
+
+        IO.print("Name: ");
         String name = sc.nextLine();
-        IO.print("\nCPF: ");
+
+        IO.print("CPF: ");
         String cpf = sc.nextLine();
-        IO.print("\nE-mail: ");
+
+        IO.print("Email: ");
         String email = sc.nextLine();
-        IO.print("\nAge: ");
+
+        IO.print("Age: ");
         int age = sc.nextInt();
         sc.nextLine();
 
-        UserAccount user = new UserAccount(name, cpf, email, age);
+        String password = readPassword(sc);
 
-        userAccountList.add(user);
+        UserAccount user = new UserAccount(name, cpf, email, age, password);
 
-        IO.println("\nNew user added, welcome " + name);
+        users.add(user);
 
-        IO.println("\nDo you want to see your entered data?");
-        char letter = sc.nextLine().toUpperCase().charAt(0);
-
-        if (letter == 'S'){
-            displayUser();
-        }
+        IO.println("User created successfully!");
     }
 
-    public static void displayUser(){
-        for (UserAccount user : userAccountList) {
-            IO.println("\n==============================");
-            IO.println("Name: " + user.getName());
-            IO.println("CPF: " + user.getCpf());
-            IO.println("Email: " + user.getEmail());
-            IO.println("Age: " + user.getAge());
+    private String readPassword(Scanner sc){
+
+        String password;
+
+        do {
+
+            IO.print("Create a 6 digit password: ");
+            password = sc.nextLine();
+
+            if (!password.matches("\\d{6}")){
+                IO.println("Password must contain exactly 6 numbers!");
+            }
+
+        } while (!password.matches("\\d{6}"));
+
+        return password;
+    }
+
+    public UserAccount login(String cpf, String password){
+        for (UserAccount user : users){
+            if (user.getCpf().equals(cpf) && user.getPassword().equals(password)){
+                IO.println("Login succesed! Welcome " + user.getName());
+                return user;
+            }
         }
+        return null;
     }
 }

@@ -1,0 +1,53 @@
+package menu;
+
+import java.util.*;
+
+import entities.UserAccount;
+import services.TransactionService;
+import services.UserAccountService;
+
+public class BankMenu {
+    TransactionService transactionService = new TransactionService();
+
+
+    private static final String HEADER =
+            "=====================================\n" +
+            "===          BANK SERVICES        ===\n" +
+            "=====================================";
+
+    public void mainBank(UserAccount user, Scanner sc){
+        Locale.setDefault(Locale.US);
+        UserAccountService userAccountService = new UserAccountService();
+
+        int option;
+
+        do {
+            IO.println(HEADER);
+            IO.println("\n1- Balance");
+            IO.println("2- Deposit");
+            IO.println("3- Withdraw");
+            IO.println("4- Account data");
+            IO.println("0- Exit");
+            option = sc.nextInt();
+            sc.nextLine();
+
+            switch (option){
+                case 1:
+                    transactionService.showAccountBalance(user);
+                    break;
+                case 2:
+                    IO.println("How many do you want to deposit?");
+                    double depositValue = sc.nextDouble();
+                    transactionService.accountDeposit(user, depositValue);
+                    break;
+                case 3:
+                    IO.println("How many do you want to withdraw?");
+                    double withdrawValue = sc.nextDouble();
+                    transactionService.accountWithdraw(user, withdrawValue);
+                    break;
+                default:
+                    IO.println("Invalid operation!");
+            }
+        } while (option != 0);
+    }
+}

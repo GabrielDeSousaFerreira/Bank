@@ -5,12 +5,24 @@ public class UserAccount {
     private String cpf;
     private String email;
     private int age;
+    private String password;
+    private double balance;
 
-    public UserAccount(String name, String cpf, String email, int age) {
+    public UserAccount(String name, String cpf, String email, int age, String password) {
         this.name = name;
         this.cpf = cpf;
         this.email = email;
         this.age = age;
+        this.password = password;
+        this.balance = 0.0;
+    }
+
+    public void deposit(double value){
+        balance += value;
+    }
+
+    public void withdraw(double value){
+        balance -= value;
     }
 
     public String getName() {
@@ -43,5 +55,21 @@ public class UserAccount {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }
