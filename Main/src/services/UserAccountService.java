@@ -1,19 +1,22 @@
 package services;
 
+import entities.Account;
 import entities.UserAccount;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class UserAccountService {
-
-    //UserAccount user = new UserAccount(name, cpf, email, age, password, balance);
 
     private static final String HEADER =
             "==========================\n" +
             "===    ACCOUNT MENU    ===\n" +
             "===========================";
 
-    private ArrayList<UserAccount> users = new ArrayList<>();
+    private ArrayList<Account> accounts = new ArrayList<>();
 
     public void createUser(Scanner sc){
 
@@ -25,18 +28,33 @@ public class UserAccountService {
         IO.print("CPF: ");
         String cpf = sc.nextLine();
 
-        IO.print("Email: ");
-        String email = sc.nextLine();
+        IO.print("Birth date (dd/MM/yyyy): ");
+
+        LocalDate birthDate = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        while (birthDate == null) {
+            try {
+                String input = sc.nextLine();
+                birthDate = LocalDate.parse(input, formatter);
+            } catch (DateTimeParseException e) {
+                IO.println("Invalid date! Please use format yyyy/MM/dd");
+                IO.print("Try again: ");
+            }
+        }
 
         IO.print("Age: ");
         int age = sc.nextInt();
         sc.nextLine();
 
+        IO.print("Password: ");
         String password = readPassword(sc);
 
-        UserAccount user = new UserAccount(name, cpf, email, age, password);
+        UserAccount user = new UserAccount(password, name, cpf, birthDate, age);
 
-        users.add(user);
+        IO.println(user);
+
+        accounts.add(user);
 
         IO.println("User created successfully!");
     }
@@ -59,13 +77,17 @@ public class UserAccountService {
         return password;
     }
 
-    public UserAccount login(String cpf, String password){
-        for (UserAccount user : users){
-            if (user.getCpf().equals(cpf) && user.getPassword().equals(password)){
-                IO.println("Login succesed! Welcome " + user.getName());
-                return user;
+    public Account login(String document, String password){
+        for (Account acc : accounts){
+            if (acc.getDocument().equals(document) &&
+                    acc.getPassword().equals(password)) {
+
+                IO.println("Login successful! Welcome " + acc.getDisplayName());
+                return acc;
             }
         }
+
+        IO.println("Invalid credentials!");
         return null;
     }
 }

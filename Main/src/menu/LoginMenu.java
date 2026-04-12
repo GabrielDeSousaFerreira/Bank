@@ -1,6 +1,6 @@
 package menu;
 
-import entities.UserAccount;
+import entities.Account;
 import services.UserAccountService;
 
 import java.util.*;
@@ -16,20 +16,22 @@ public class LoginMenu {
 
         while (true){
             IO.println(HEADER);
-            IO.print("CPF: ");
-            String cpf = sc.nextLine();
+
+            IO.print("CPF/CNPJ: ");
+            String document = sc.nextLine();
+
             IO.print("Password: ");
             String password = sc.nextLine();
 
-            UserAccount user = accountService.login(cpf, password);
+            Account account = accountService.login(document, password);
 
-            if (user != null){
+            if (account != null){
                 BankMenu bankMenu = new BankMenu();
-                bankMenu.mainBank(user, sc);
+                bankMenu.mainBank(account, sc);
                 break;
             }
 
-            IO.println("CPF or password incorrect!");
+            IO.println("Document or password incorrect!");
             IO.println("1 - Try again");
             IO.println("2 - Create account");
 

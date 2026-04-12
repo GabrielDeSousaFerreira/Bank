@@ -1,28 +1,19 @@
 package entities;
 
-public class UserAccount {
+import java.time.LocalDate;
+
+public class UserAccount extends Account{
     private String name;
     private String cpf;
-    private String email;
+    private LocalDate birthDate;
     private int age;
-    private String password;
-    private double balance;
 
-    public UserAccount(String name, String cpf, String email, int age, String password) {
+    public UserAccount(String password, String name, String cpf, LocalDate birthDate, int age) {
+        super(password);
         this.name = name;
         this.cpf = cpf;
-        this.email = email;
+        this.birthDate = birthDate;
         this.age = age;
-        this.password = password;
-        this.balance = 0.0;
-    }
-
-    public void deposit(double value){
-        balance += value;
-    }
-
-    public void withdraw(double value){
-        balance -= value;
     }
 
     public String getName() {
@@ -37,18 +28,6 @@ public class UserAccount {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public int getAge() {
         return age;
     }
@@ -57,19 +36,27 @@ public class UserAccount {
         this.age = age;
     }
 
-    public String getPassword() {
-        return password;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String toString() {
+        return "\nUser data: " +
+                "\nName: " + name +
+                "\nCPF: " + cpf +
+                "\nAge: " + age +
+                "\nBirth year: " + birthDate +
+                "\nPassword: " + password;
     }
 
-    public double getBalance() {
-        return balance;
+    @Override
+    public String getDocument() {
+        return cpf;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    @Override
+    public String getDisplayName() {
+        return name;
     }
 }
