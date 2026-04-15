@@ -1,18 +1,29 @@
 package menu;
 
 import entities.Account;
+import services.AccountService;
+import services.BusinessAccountService;
 import services.UserAccountService;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class LoginMenu {
+    private UserAccountService userAccountService;
+    private BusinessAccountService businessAccountService;
+    private AccountService accountService;
+
+    public LoginMenu(AccountService accountService, UserAccountService userAccountService, BusinessAccountService businessAccountService) {
+        this.accountService = accountService;
+        this.userAccountService = userAccountService;
+        this.businessAccountService = businessAccountService;
+    }
 
     private static final String HEADER =
             "=====================================\n" +
             "===       WELCOME TO GB BANK      ===\n" +
             "=====================================";
 
-    public void loginScreen(UserAccountService accountService, Scanner sc){
+    public void loginScreen(Scanner sc){
 
         while (true){
             IO.println(HEADER);
@@ -31,7 +42,7 @@ public class LoginMenu {
                 break;
             }
 
-            IO.println("Document or password incorrect!");
+            IO.println("CPF/CNPJ or password incorrect!");
             IO.println("1 - Try again");
             IO.println("2 - Create account");
 
@@ -39,7 +50,15 @@ public class LoginMenu {
             sc.nextLine();
 
             if (option == 2){
-                accountService.createUser(sc);
+                IO.println("\n1- User account");
+                IO.println("2- Business account");
+                int opc = sc.nextInt();
+
+                if (opc == 1) {
+                    userAccountService.createUser(sc);
+                } else if (opc == 2) {
+                    businessAccountService.createBusinessAccount(sc);
+                }
             }
         }
     }

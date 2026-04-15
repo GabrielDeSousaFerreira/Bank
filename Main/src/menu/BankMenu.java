@@ -1,6 +1,7 @@
 package menu;
 
-import java.util.*;
+import java.util.Locale;
+import java.util.Scanner;
 
 import entities.Account;
 import services.TransactionService;
@@ -13,6 +14,19 @@ public class BankMenu {
             "=====================================\n" +
             "===          BANK SERVICES        ===\n" +
             "=====================================";
+
+    private double readDouble(Scanner sc) {
+        while (true) {
+            String input = sc.nextLine();
+
+            try {
+                input = input.replace(",", "."); // aceita vírgula e ponto
+                return Double.parseDouble(input);
+            } catch (NumberFormatException e) {
+                IO.println("Invalid value! Please enter a valid number:");
+            }
+        }
+    }
 
     public void mainBank(Account account, Scanner sc){
         Locale.setDefault(Locale.US);
@@ -37,13 +51,13 @@ public class BankMenu {
 
                 case 2:
                     IO.println("How much do you want to deposit?");
-                    double depositValue = sc.nextDouble();
+                    double depositValue = readDouble(sc);
                     transactionService.accountDeposit(account, depositValue);
                     break;
 
                 case 3:
                     IO.println("How much do you want to withdraw?");
-                    double withdrawValue = sc.nextDouble();
+                    double withdrawValue = readDouble(sc);
                     transactionService.accountWithdraw(account, withdrawValue);
                     break;
 

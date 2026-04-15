@@ -46,8 +46,7 @@ public class UserAccount extends Account{
                 "\nName: " + name +
                 "\nCPF: " + cpf +
                 "\nAge: " + age +
-                "\nBirth year: " + birthDate +
-                "\nPassword: " + password;
+                "\nBirth year: " + birthDate;
     }
 
     @Override
