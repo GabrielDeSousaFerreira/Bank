@@ -1,157 +1,187 @@
-# Bank User Registration System
 
-A simple banking system developed in Java focused on Object-Oriented Programming (OOP) and clean project structure using packages.
+---
 
-This project simulates a basic banking environment where users can:
-- Create an account
-- Log into the system
-- Perform banking operations
-- View account information
+#  GB Bank - Banking System in Java
 
-## Technologies Used
-- Java
-- Object-Oriented Programming (OOP)
-- ArrayList
-- Scanner
-- Layered architecture (packages)
+##  About the Project
 
-## Project Structure
-src
-│
-├── application
-│   └── Main.java
-│
-├── entities
-│   └── UserAccount.java
-│
-├── menu
-│   ├── LoginMenu.java
-│   └── BankMenu.java
-│
-└── services
-├── UserAccountService.java
-└── TransactionService.java
+**GB Bank** is a simple banking system developed in **Java**, focused on practicing **Object-Oriented Programming (OOP)**, data handling, and console interaction.
 
-# entities
+The system allows users to:
 
-## UserAccount
+* Create accounts (personal or business)
+* Log in
+* Check balance
+* Deposit money
+* Withdraw money
+* View account data
 
-Contains the system model classes.
+---
 
-Represents a bank user account.
+##  Features
 
-Attributes:
-- `name` – User's name
-- `cpf` – Brazilian identification number
-- `email` – User email
-- `age` – User age
-- `password` - Account password
-- `balance` - Account balance
+###  User Account
 
-This class also includes:
-- Constructors
-- Getters and Setters
+* Registration with:
 
-# services
+    * Name
+    * CPF (Brazilian ID)
+    * Birth date
+    * Age
+    * Password (6 digits)
+* Operations:
 
-Responsible for the system business logic.
+    * Deposit
+    * Withdraw
+    * Balance inquiry
+    * View account data
 
-## UserAccountService.java
+###  Business Account
 
-Responsible for:
-- Creating accounts
-- Storing accounts in memory
-- Searching users
-- Validating login
+* Registration with:
 
-Uses:
-`ArrayList<UserAccount>` to store created accounts.
+    * Company name
+    * CNPJ (Business ID)
+    * Foundation date
+    * Annual revenue
+    * Password (6 digits)
+* Business rule:
 
-## TransactionService.java
+    * Can only be created if revenue ≥ **50,000**
+* Operations:
 
-Responsible for bank transactions, such as:
-- Deposit
-- Withdrawal
-- Transfer
-- Bill payment
+    * Deposit
+    * Withdraw
+    * Balance inquiry
+    * View account data
 
-# menu
+---
 
-Contains the classes responsible for the console interaction with the user.
+##  Project Structure
 
-## LoginMenu.java
+```
+application/
+ └── Program.java
 
-Responsible for:
-- Creating accounts
-- Creating a password
-- User login
-- Redirecting the user to the bank menu
+entities/
+ ├── Account.java (abstract class)
+ ├── UserAccount.java
+ └── BusinessAccount.java
 
-## BankMenu.java
+menu/
+ ├── LoginMenu.java
+ └── BankMenu.java
 
-Menu displayed after the user logs in.
-- Allows the user to:
-- Deposit money
-- Withdraw money
-- Transfer money
-- Check account balance
-- Exit the account
+services/
+ ├── AccountService.java
+ ├── UserAccountService.java
+ ├── BusinessAccountService.java
+ └── TransactionService.java
+```
 
-# Concepts Applied
+---
 
-- This project applies several important programming concepts:
-- Object-Oriented Programming
-- Separation of responsibilities
-- Encapsulation
-- Layered architecture
-- List manipulation (ArrayList)
-- User input with Scanner
-- Console menu structures
+## 🏗 Architecture
 
-# How to run project
+The project follows a clear separation of responsibilities:
 
-## Clone the repository
-`git clone https://github.com/your-username/bank-system.git`
+* **entities** → System data models
+* **services** → Business logic
+* **menu** → User interaction (console)
+* **application** → Main execution class
 
-## Open the project in an IDE such as:
-- IntelliJ
-- Eclipse
-- VS Code
+---
 
-## Run the file
+##  Concepts Used
 
-`Main.java`
+* Object-Oriented Programming (OOP)
+* Inheritance (`Account` → `UserAccount` / `BusinessAccount`)
+* Polymorphism
+* Encapsulation
+* Abstract classes
+* Data validation
+* Exception handling (`try/catch`)
+* Date handling (`LocalDate`)
+* Regex (password validation)
 
-# Exemple Execution
+---
 
-```java
-==== GB BANK ===
+##  System Rules
 
-1 - Create account
-2 - Login
-0 - Exit
+* Password must contain **exactly 6 digits**
+* Business account requires:
 
-//AFTER CREATE ACCOUNT
+    * Minimum revenue of **50,000**
+* Login requires:
 
-Enter your name:
-Enter your CPF:
-Enter your email:
-Enter your age:
-Create a 6-digit password:
+    * Valid CPF/CNPJ and password
 
-//AFTER LOGIN
+---
 
-==== BANK MENU ====
+## ▶ How to Run
 
-1 - Deposit
-2 - Withdraw
-3 - Transfer
-4 - Check balance
-0 - Exit
+### 1. Requirements
 
-@Author Gabriel Sousa Ferreira
+* Java JDK 8 or higher
 
-Project developed for studying:
-- Java
-- Object-Oriented Programming
-- System architecture and organization
+### 2. Compile
+
+```bash
+javac application/Program.java
+```
+
+### 3. Run
+
+```bash
+java application.Program
+```
+
+---
+
+##  Example Usage
+
+```
+==== GB BANK ====
+1- Create account
+2- Login
+0- Exit
+```
+
+After login:
+
+```
+=== BANK SERVICES ===
+1- Balance
+2- Deposit
+3- Withdraw
+4- Account data
+0- Exit
+```
+
+---
+
+##  Notes
+
+* Data is stored in memory (ArrayList), meaning:
+
+    * All data is lost when the program stops
+* No database integration yet
+
+---
+
+##  Future Improvements
+
+*  Database integration (MySQL / PostgreSQL)
+*  Password encryption
+*  Transaction history
+*  Transfers between accounts
+*  Graphical interface (JavaFX or Swing)
+*  REST API with Spring Boot
+
+---
+
+##  Author
+
+Gabriel de Sousa Ferreira.
+
+---
